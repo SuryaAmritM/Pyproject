@@ -1,0 +1,76 @@
+<!-- success.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Placed Successfully!</title>
+    <style>
+        body {
+            background: url("{{ url_for('static', filename='images/background.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: rgba(255, 255, 255, 0.8); /* Dark semi-transparent background */
+            color: #ff6347;
+            text-align: center;
+            padding: 20px;
+            font-size: 2.5rem;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 10px;
+            width: 400px;
+            margin: 40px auto; /* Centered container */
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #ff6347;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .button {
+            background-color: #ff6347;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .button:hover {
+            background-color: #e5533d;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Full-width header similar to step 1 -->
+    <div class="header">
+        Enjoy Your Meal!
+    </div>
+
+    <!-- Container for success message -->
+    <div class="container">
+        <h1>Order Placed Successfully!</h1>
+        <p>Thank you for placing your order. We will process it soon.</p>
+        <p>You will receive a confirmation email with your order details.</p>
+        <p>If you have any questions, please feel free to contact us at 0123456789.</p>
+        <br>
+        <a href="{{ url_for('step1') }}" class="button">Place Another Order</a>
+    </div>
+
+</body>
+</html>

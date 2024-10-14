@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Selection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 600px;
+        }
+        h2, h3 {
+            margin-bottom: 20px;
+        }
+        .menu-options {
+            margin-bottom: 30px;
+        }
+        .food-items {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            justify-items: center;
+        }
+        .food-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .food-item img {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 5px 15px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button.added {
+            background-color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="/step3" method="POST">
+            <h2>Select Menu</h2>
+            <!-- Menu selection: Veg or Non-Veg -->
+            <div class="menu-options">
+                <label>
+                    <input type="radio" name="menu_type" value="veg" required> Veg
+                </label>
+                <label>
+                    <input type="radio" name="menu_type" value="non-veg"> Non-Veg
+                </label>
+            </div>
+
+            <!-- Veg Menu Section -->
+            <div id="veg-section" style="display: none;">
+                <h3>Veg Menu</h3>
+                <div class="food-items">
+                    <!-- 9 Veg items -->
+                    <div class="food-item">
+                        <img src="{{ url_for('static', filename='images/paneer_butter_masala.jpg') }}" alt="Paneer Butter Masala">
+                        Paneer Butter Masala
+                        <button type="button" onclick="toggleItem(this, 'Paneer Butter Masala')">Add+</button>
+                    </div>
+                    <div class="food-item">
+                        <img src="{{ url_for('static', filename='images/aloo_gobi.jpg') }}" alt="Aloo Gobi">
+                        Aloo Gobi
+                        <button type="button" onclick="toggleItem(this, 'Aloo Gobi')">Add+</button>
+                    </div>
+                    <div class="food-item">
+                        <img src="{{ url_for('static', filename='images/vegetable_biryani.jpg') }}" alt="Vegetable Biryani">
+                        Vegetable Biryani
+                        <button type="button" onclick="toggleItem(this, 'Vegetable Biryani')">Add+</button>
+                    </div>
+                    <div class="food-item">
+                        <img src="{{ url_for('static', filename='images/veg_kurma.jpg') }}" alt="Veg Kurma">
+                        Veg Kurma
+                        <button type="button" onclick="toggleItem(this, 'Veg Kurma')">Add+</button>
+                    </div>
+                    <div class="food-item">
+                        <img src="{{ url_for('static', filename='images/saag_paneer.jpg') }}" alt="Saag Paneer">
+                        Saag Paneer
+                        <button type="button" onclick="toggleItem(this, 'Saag Paneer')">Add+</button>
+                    </div>
+                    <div class="food-item">
+                        <img src="{{ url_for('static', filename='images/dal_makhani.jpg') }}" alt="Dal Makhani">
+                        Dal Makhani
+                        <button type="button" onclick="toggleItem(this, 'Dal Makhani')">Add+</button>
+                    </div>
+                    <div class="food-item">
+                        <img src="{{ url_for('static', filename='images/chole.jpg') }}" alt="Chole">
+                        Chole
+                        <button type="button" onclick="toggleItem(this, 'Chole')">Add+</button>
+                    </div>
+                    <div class="food-item">
+                        <img src="{{ url_for('static', filename='images/baingan_bharta.jpg') }}" alt="Baingan Bharta">
+                        Baingan Bharta
+                        <button type="button" onclick="toggleItem(this, 'Baingan Bharta')">Add+</button>
+                    </div>
+                    <div class="food-item">
+                        <img src="{{ url_for('static', filename='images/malai_kofta.jpg') }}" alt="Malai Kofta">
+                        Malai Kofta
+                        <button type="button" onclick="toggleItem(this, 'Malai Kofta')">Add+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Non-Veg Menu Section -->
+            <div id="nonveg-section" style="display: none;">
+                <h3>Non-Veg Menu</h3>
+                
+                <div class="food-items">
+                    <!-- 9 Non-Veg items -->
+                    <div class="food-item">
+                        <img src="{{ url_for('static', filename='images/chicken_curry.jpg') }}" alt="Chicken Curry">
+                        Chicken Curry
+                        <button type="button" onclick="toggleItem(this, 'Chicken Curry')">Add+</button>
+                    </div>
+                    <div class="food-item">
+                        <img src="{{ url_for('static', filename='images/mutton_biryani.jpg') }}" alt="Mutton Biryani">
+                        Mutton Biryani
+                        <button type="button" onclick="toggleItem(this, 'Mutton Biryani')">Add+</button>
+                    </div>
+                    <div class="food-item">
+                        <img src="{{ url_for('static', filename='images/fish_fry.jpg') }}" alt="Fish Fry">
+                        Fish Fry
+                        <button type="button" onclick="toggleItem(this, 'Fish Fry')">Add+</button>
+                    </div>
+                    <div class="food-item">
+                        <img src="{{ url_for('static', filename='images/butter_chicken.jpg') }}" alt="Butter Chicken">
+                        Butter Chicken
+                        <button type="button" onclick="toggleItem(this, 'Butter Chicken')">Add+</button>
+                    </div>
+                    <div class="food-item">
+                        <img src="{{ url_for('static', filename='images/prawn_curry.jpg') }}" alt="Prawn Curry">
+                        Prawn Curry
+                        <button type="button" onclick="toggleItem(this, 'Prawn Curry')">Add+</button>
+                    </div>
+                    <div class="food-item">
+                        <img src="{{ url_for('static', filename='images/egg_curry.jpg') }}" alt="Egg Curry">
+                        Egg Curry
+                        <button type="button" onclick="toggleItem(this, 'Egg Curry')">Add+</button>
+                    </div>
+                    <div class="food-item">
+                        <img src="{{ url_for('static', filename='images/chicken_biryani.jpg') }}" alt="Chicken Biryani">
+                        Chicken Biryani
+                        <button type="button" onclick="toggleItem(this, 'Chicken Biryani')">Add+</button>
+                    </div>
+                    <div class="food-item">
+                        <img src="{{ url_for('static', filename='images/chicken_tikka.jpg') }}" alt="Chicken Tikka">
+                        Chicken Tikka
+                        <button type="button" onclick="toggleItem(this, 'Chicken Tikka')">Add+</button>
+                    </div>
+                    <div class="food-item">
+                        <img src="{{ url_for('static', filename='images/rogan_josh.jpg') }}" alt="Rogan Josh">
+                        Rogan Josh
+                        <button type="button" onclick="toggleItem(this, 'Rogan Josh')">Add+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hidden input to store selected items -->
+            <input type="hidden" name="food_items" id="selectedItems">
+
+            <button type="submit">Checkout</button>
+        </form>
+    </div>
+
+    <script>
+        // Show the corresponding menu section (Veg or Non-Veg) when selected
+        document.querySelectorAll('input[name="menu_type"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.getElementById('veg-section').style.display = (this.value === 'veg') ? 'block' : 'none';
+                document.getElementById('nonveg-section').style.display = (this.value === 'non-veg') ? 'block' : 'none';
+            });
+        });
+
+        // Function to toggle between "Add+" and "Added" states
+        function toggleItem(button, itemName) {
+            const selectedItems = document.getElementById('selectedItems');
+            let selected = selectedItems.value ? selectedItems.value.split(',') : [];
+
+            if (button.textContent === 'Add+') {
+                button.textContent = 'Added';
+                button.classList.add('added');
+                selected.push(itemName);
+            } else {
+                button.textContent = 'Add+';
+                button.classList.remove('added');
+                selected = selected.filter(item => item !== itemName);
+            }
+
+            selectedItems.value = selected.join(',');
+        }
+    </script>
+</body>
+</html>

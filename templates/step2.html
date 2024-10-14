@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Days and Times</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            background-color: #f9f9f9;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        label {
+            margin-bottom: 10px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        input[type="time"] {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <form id="daysForm" action="/step2" method="POST" onsubmit="return validateForm()">
+        <h2>Select Days and Times</h2>
+
+        <label for="day1">
+            <input type="checkbox" id="day1" name="day" value="Monday"> Monday
+            <input type="time" id="time_Monday" name="time_Monday" disabled>
+        </label>
+
+        <label for="day2">
+            <input type="checkbox" id="day2" name="day" value="Tuesday"> Tuesday
+            <input type="time" id="time_Tuesday" name="time_Tuesday" disabled>
+        </label>
+
+        <label for="day3">
+            <input type="checkbox" id="day3" name="day" value="Wednesday"> Wednesday
+            <input type="time" id="time_Wednesday" name="time_Wednesday" disabled>
+        </label>
+
+        <label for="day4">
+            <input type="checkbox" id="day4" name="day" value="Thursday"> Thursday
+            <input type="time" id="time_Thursday" name="time_Thursday" disabled>
+        </label>
+
+        <label for="day5">
+            <input type="checkbox" id="day5" name="day" value="Friday"> Friday
+            <input type="time" id="time_Friday" name="time_Friday" disabled>
+        </label>
+
+        <label for="day6">
+            <input type="checkbox" id="day6" name="day" value="Saturday"> Saturday
+            <input type="time" id="time_Saturday" name="time_Saturday" disabled>
+        </label>
+
+        <label for="day7">
+            <input type="checkbox" id="day7" name="day" value="Sunday"> Sunday
+            <input type="time" id="time_Sunday" name="time_Sunday" disabled>
+        </label>
+
+        <button type="submit">Next</button>
+    </form>
+
+    <script>
+        // Enable/disable time input based on checkbox selection
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', (event) => {
+                const timeInput = event.target.nextElementSibling;
+                timeInput.disabled = !event.target.checked;
+            });
+        });
+
+        // Validate form - ensure at least one day and its corresponding time is selected
+        function validateForm() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            let isAnyDaySelected = false;
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const timeInput = checkbox.nextElementSibling;
+                    if (timeInput.value) {
+                        isAnyDaySelected = true;
+                    } else {
+                        alert("Please select a time for " + checkbox.value);
+                        isAnyDaySelected = false;
+                        return false;
+                    }
+                }
+            });
+
+            if (!isAnyDaySelected) {
+                alert("Please select at least one day and time.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
